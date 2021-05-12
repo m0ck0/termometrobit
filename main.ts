@@ -42,6 +42,7 @@ input.onButtonPressed(Button.B, function () {
 let maxtemp = 0
 let mintemp = 0
 let TargetTemp = 0
+bluetooth.startTemperatureService()
 bluetooth.startUartService()
 let realtemp = input.temperature()
 TargetTemp = 22
