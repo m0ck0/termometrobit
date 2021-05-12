@@ -42,7 +42,6 @@ input.onGesture(Gesture.Shake, function () {
 let maxtemp = 0
 let mintemp = 0
 let TargetTemp = 0
-bluetooth.startTemperatureService()
 bluetooth.startUartService()
 let realtemp = input.temperature()
 TargetTemp = 22
@@ -50,7 +49,7 @@ mintemp = realtemp
 maxtemp = realtemp
 basic.forever(function () {
     realtemp = input.temperature()
-    bluetooth.uartWriteValue("real temp", input.temperature())
+    bluetooth.uartWriteValue("real temp", realtemp)
     bluetooth.uartWriteValue("min", mintemp)
     bluetooth.uartWriteValue("max", maxtemp)
     bluetooth.uartWriteValue("calentador", TargetTemp)
