@@ -10,7 +10,6 @@ input.onButtonPressed(Button.A, function () {
     basic.showNumber(TargetTemp)
 })
 input.onGesture(Gesture.Shake, function () {
-    basic.pause(100)
     basic.showLeds(`
         . . . . .
         # # # # #
@@ -19,7 +18,6 @@ input.onGesture(Gesture.Shake, function () {
         . . # . .
         `)
     basic.showNumber(mintemp)
-    basic.pause(100)
     basic.showLeds(`
         . . # . .
         . # . # .
@@ -49,7 +47,6 @@ TargetTemp = 22
 mintemp = realtemp
 maxtemp = realtemp
 basic.forever(function () {
-    basic.showNumber(input.temperature())
     realtemp = input.temperature()
     serial.writeValue("temperatura", input.temperature())
     serial.writeValue("Calentador", pins.digitalReadPin(DigitalPin.P0))
@@ -67,5 +64,13 @@ basic.forever(function () {
     if (realtemp > maxtemp) {
         maxtemp = realtemp
     }
-    basic.pause(500)
+    basic.pause(5000)
+    basic.showLeds(`
+        . # # . .
+        . # # . .
+        # # # # .
+        # # # # .
+        . # # . .
+        `)
+    basic.showNumber(input.temperature())
 })
