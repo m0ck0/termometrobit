@@ -9,6 +9,17 @@ input.onButtonPressed(Button.A, function () {
         `)
     basic.showNumber(TargetTemp)
 })
+input.onButtonPressed(Button.B, function () {
+    TargetTemp += 1
+    basic.showLeds(`
+        . # # # .
+        # . . . #
+        # . . . #
+        . # . # .
+        . # # # .
+        `)
+    basic.showNumber(TargetTemp)
+})
 input.onGesture(Gesture.Shake, function () {
     basic.showLeds(`
         . . . . .
@@ -28,17 +39,6 @@ input.onGesture(Gesture.Shake, function () {
     basic.showNumber(maxtemp)
     basic.clearScreen()
 })
-input.onButtonPressed(Button.B, function () {
-    TargetTemp += 1
-    basic.showLeds(`
-        . # # # .
-        # . . . #
-        # . . . #
-        . # . # .
-        . # # # .
-        `)
-    basic.showNumber(TargetTemp)
-})
 let maxtemp = 0
 let mintemp = 0
 let TargetTemp = 0
@@ -50,8 +50,6 @@ mintemp = realtemp
 maxtemp = realtemp
 basic.forever(function () {
     realtemp = input.temperature()
-    serial.writeValue("temperatura", input.temperature())
-    serial.writeValue("Calentador", pins.digitalReadPin(DigitalPin.P0))
     bluetooth.uartWriteValue("real temp", input.temperature())
     bluetooth.uartWriteValue("min", mintemp)
     bluetooth.uartWriteValue("max", maxtemp)
