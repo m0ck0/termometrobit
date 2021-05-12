@@ -1,4 +1,5 @@
-input.onButtonPressed(Button.A, function () {
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
+    
     TargetTemp += -1
     basic.showLeds(`
         . # # # .
@@ -9,7 +10,7 @@ input.onButtonPressed(Button.A, function () {
         `)
     basic.showNumber(TargetTemp)
 })
-input.onGesture(Gesture.Shake, function () {
+input.onGesture(Gesture.Shake, function on_gesture_shake() {
     basic.showLeds(`
         . . . . .
         # # # # #
@@ -28,7 +29,8 @@ input.onGesture(Gesture.Shake, function () {
     basic.showNumber(maxtemp)
     basic.clearScreen()
 })
-input.onButtonPressed(Button.B, function () {
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
+    
     TargetTemp += 1
     basic.showLeds(`
         . # # # .
@@ -46,7 +48,8 @@ let realtemp = input.temperature()
 TargetTemp = 22
 mintemp = realtemp
 maxtemp = realtemp
-basic.forever(function () {
+basic.forever(function on_forever() {
+    
     realtemp = input.temperature()
     serial.writeValue("temperatura", input.temperature())
     serial.writeValue("Calentador", pins.digitalReadPin(DigitalPin.P0))
@@ -54,16 +57,20 @@ basic.forever(function () {
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
     }
+    
     if (input.temperature() > TargetTemp) {
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
     }
+    
     if (realtemp < mintemp) {
         mintemp = realtemp
     }
+    
     if (realtemp > maxtemp) {
         maxtemp = realtemp
     }
+    
     basic.pause(5000)
     basic.showLeds(`
         . # # . .
