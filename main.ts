@@ -68,7 +68,7 @@ basic.forever(function () {
     if (realtemp > maxtemp) {
         maxtemp = realtemp
     }
-    basic.pause(5000)
+    basic.pause(3000)
     basic.showLeds(`
         . # # . .
         . # # . .
