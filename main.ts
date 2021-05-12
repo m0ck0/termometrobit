@@ -42,6 +42,7 @@ input.onButtonPressed(Button.B, function () {
 let maxtemp = 0
 let mintemp = 0
 let TargetTemp = 0
+bluetooth.startUartService()
 let realtemp = input.temperature()
 TargetTemp = 22
 mintemp = realtemp
@@ -50,10 +51,11 @@ basic.forever(function () {
     realtemp = input.temperature()
     serial.writeValue("temperatura", input.temperature())
     serial.writeValue("Calentador", pins.digitalReadPin(DigitalPin.P0))
-    bluetooth.uartWriteValue("temp", input.temperature())
+    bluetooth.uartWriteValue("real temp", input.temperature())
     bluetooth.uartWriteValue("min", mintemp)
     bluetooth.uartWriteValue("max", maxtemp)
-    bluetooth.uartWriteValue("calen", TargetTemp)
+    bluetooth.uartWriteValue("calentador", TargetTemp)
+    bluetooth.uartWriteLine("----------------------------")
     if (input.temperature() <= TargetTemp) {
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
